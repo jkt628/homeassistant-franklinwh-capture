@@ -1,0 +1,21 @@
+appId: ${MAESTRO_APP_ID}
+---
+- tapOn: "Backup Reserve.*"
+- tapOn: # +
+    point: "59%,36%"
+- tapOn: "Save"
+- tapOn: "Apply"
+- tapOn: "Confirm"
+- runFlow:
+    file: sleep.yaml
+    env:
+      milliseconds: 20000
+- tapOn: "Backup Reserve.*"
+- tapOn: # -
+    point: "41%,36%"
+- tapOn: "Save"
+- runFlow:
+    file: sleep.yaml
+    env:
+      milliseconds: 20000
+- pressKey: back

@@ -1,0 +1,13 @@
+appId: ${MAESTRO_APP_ID}
+---
+- tapOn: "More, Tab 4 of 4"
+- tapOn: "Site Devices"
+- tapOn: "FHP.*"
+- tapOn: "aGate.*"
+- assertVisible: "aGate"
+- pressKey: back
+- tapOn: "aPower.*"
+- assertVisible: "aPower"
+- pressKey: back
+- pressKey: back
+- pressKey: back

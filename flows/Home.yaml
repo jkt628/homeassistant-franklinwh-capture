@@ -1,0 +1,13 @@
+appId: ${MAESTRO_APP_ID}
+---
+- tapOn:
+    text: "Home, Tab 1 of 4" 
+    waitToSettleTimeoutMs: 5000
+- runFlow:
+    file: sleep.yaml
+    env:
+      milliseconds: 15000
+- swipe:
+    start: 50%,69%
+    end: 50%,45%
+    durationMs: 100

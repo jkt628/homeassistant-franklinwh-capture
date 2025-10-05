@@ -3,12 +3,12 @@
 test every aspect of FranklinWH app that could be interesting to Home Assistant, starting with the more useful stuff.
 capture and export with [HTTP Toolkit] for future reference and redo after upgrades.
 
-consider an Android UI test framework for repetition and regression.
-[Maestro](https://docs.maestro.dev) looks useful and simple.  consider test automation with **BOTH** FranklinWH and Home Assistant apps, _i.e._, ensure changes in HA reflect in FWH.
+[Maestro](https://docs.maestro.dev) provides the automation for UI coverage.  
+consider test automation with **BOTH** FranklinWH and Home Assistant apps, *i.e.*, ensure changes in HA reflect in FWH.
 
 i do not have optional components like [Smart Circuits] or [Generator Module].
 
-i do participate in _Virtual Power Plant_ ([VPP]) so capture an event sometime.
+i do participate in *Virtual Power Plant* ([VPP]) so capture an event sometime.
 
 [HTTP Toolkit]: https://httptoolkit.com/
 [Smart Circuits]: https://www.franklinwh.com/support/overview/smart-circuits/
@@ -26,11 +26,11 @@ monitor the current state of [aGate] and [aPower] devices, weather and power dis
 [aGate]: https://www.franklinwh.com/support/overview/components-of-franklin-home-power/#agate
 [aPower]: https://www.franklinwh.com/support/overview/components-of-franklin-home-power/#apower-x
 
-expand the tab at the bottom for _Estimated backup time_.
+expand the tab at the bottom for *Estimated backup time*.
 
 ![Estimated backup time](images/Screenshot_20250927-093708_FranklinWH.png)
 
-click the Bell icon for _Messages_.
+click the Bell icon for *Messages*.
 
 ![Messages](images/Screenshot_20250927-094352_FranklinWH.png)
 
@@ -53,3 +53,20 @@ configure the [aGate].  there are a lot of settings, figure out which are intere
 ![More](images/Screenshot_20250928-065609_FranklinWH.png)
 
 these settings are probably less interesting to Home Assistant integration.
+
+## Automation
+
+### [FranklinWH.yaml](./FranklinWH.yaml)
+
+tests many functions by the [app].
+
+[app]: https://play.google.com/store/apps/details?id=com.Franklinwh.FamilyEnergy
+
+### [Off-Grid](./Off-Grid.yaml)
+
+tests Off- and On-Grid separately due to the disruption and many minutes required to complete the test.
+
+> [!WARNING]
+> *Screen timeout* **MUST BE** at least 10 minutes because each phase can take a long time to recover.
+
+## Capture

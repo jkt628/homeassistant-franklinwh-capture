@@ -1,0 +1,54 @@
+appId: ${MAESTRO_APP_ID}
+---
+- tapOn: "Mode.*"
+
+# change to each of the modes and settings, leaving the aGate on Self-Consumption 27%
+
+# Emergency Backup
+# change to 1Day and TOU, then 2Day and S-C, then leave on Indefinite
+- tapOn: "Fully charge battery for potential power outage."
+- tapOn: "Emergency Backup mode duration.*"
+- tapOn:
+    point: "50%,16%"
+- tapOn: "1Day"
+- tapOn:
+    point: "50%,26%"
+- tapOn:
+    point: "50%,79%"
+- tapOn: "Confirm"
+- tapOn: "Save and apply"
+- runFlow:
+    file: sleep.yaml
+    env:
+      milliseconds: 20000
+- tapOn: "Emergency Backup mode duration.*"
+- tapOn:
+    point: "50%,16%"
+- tapOn: "2Day"
+- tapOn:
+    point: "50%,26%"
+- tapOn:
+    point: "50%,87%"
+- tapOn: "Confirm"
+- tapOn: "Save and apply"
+- runFlow:
+    file: sleep.yaml
+    env:
+      milliseconds: 20000
+- tapOn: "Emergency Backup mode duration.*"
+- tapOn:
+    point: "50%,16%"
+- tapOn: "Indefinite"
+- tapOn: "Save and apply"
+- runFlow: sleep.yaml
+- pressKey: back
+
+# Time of Use (TOU)
+- tapOn: "Reduce electricity costs by using solar energy and batteries during peak hours."
+- runFlow: increase-apply-decrease.yaml
+
+# Self-Consumption
+- tapOn: "Maximize solar and battery power usage, minimize grid reliance."
+- runFlow: increase-apply-decrease.yaml
+
+- pressKey: back

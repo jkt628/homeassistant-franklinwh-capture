@@ -1,0 +1,6 @@
+appId: ${MAESTRO_APP_ID}
+---
+- extendedWaitUntil: 
+     visible: SleepSleepSleepSleepSleep
+     optional: true  # so the test won't fail
+     timeout: ${milliseconds || 5000} # default 5 seconds

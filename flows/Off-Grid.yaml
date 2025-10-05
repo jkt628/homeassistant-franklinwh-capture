@@ -1,0 +1,38 @@
+appId: ${MAESTRO_APP_ID}
+---
+# Disconnect from Grid
+- tapOn: "Settings, Tab 3 of 4"
+- tapOn: "Go Off-Grid" # Screen
+- tapOn: "Go Off-Grid" # Button
+- tapOn: "Confirm"
+- assertVisible: "Reconnect to Grid"
+- pressKey: back
+
+# Wait up to 10 minutes for Charging
+- tapOn:
+    text: "Home, Tab 1 of 4" 
+    waitToSettleTimeoutMs: 5000
+# clear notices
+- tapOn:
+    point: "83%,71%"
+- tapOn:
+    point: "83%,71%"
+- extendedWaitUntil: 
+     visible: Charging
+     timeout: 600000
+
+# Reconnect to Grid
+- tapOn: "Settings, Tab 3 of 4"
+- tapOn: "Go Off-Grid" # Screen
+- tapOn: "Reconnect to Grid"
+- tapOn: "Confirm"
+- assertVisible: "Go Off-Grid" # Button
+- pressKey: back
+
+# Wait up to 10 minutes for Charging
+- tapOn:
+    text: "Home, Tab 1 of 4" 
+    waitToSettleTimeoutMs: 5000
+- extendedWaitUntil: 
+     visible: Charging
+     timeout: 600000

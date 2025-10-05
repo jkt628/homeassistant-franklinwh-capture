@@ -1,0 +1,14 @@
+env:
+  MAESTRO_APP_ID: com.Franklinwh.FamilyEnergy
+appId: ${MAESTRO_APP_ID}
+tags:
+  - android
+---
+- launchApp
+- runFlow: flows/Home.yaml
+- runFlow: flows/sleep.yaml
+- runFlow: flows/Analysis.yaml
+- runFlow: flows/sleep.yaml
+- runFlow: flows/Settings.yaml
+- runFlow: flows/More.yaml
+- tapOn: "Home, Tab 1 of 4"

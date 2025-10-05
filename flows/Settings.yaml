@@ -1,0 +1,71 @@
+appId: ${MAESTRO_APP_ID}
+---
+- tapOn: "Settings, Tab 3 of 4"
+- runFlow: Settings/Mode.yaml
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Storm Hedge.*"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Go Off-Grid"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Smart Circuits"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: Generator
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Vehicle to Load (V2L)"
+- pressKey: back
+- tapOn: "Tariff Settings.*"
+- assertVisible: "Utility company.*"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Grid Import & Export"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Energy Incentives"
+- pressKey: back
+- tapOn: "Grid Profile"
+- assertVisible: "Normal Ramp"
+- pressKey: back
+- tapOn: "Virtual Power Plant (VPP)"
+- assertVisible: "Event List"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "aPower LED.*"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Network.*"
+- runFlow: sleep.yaml
+- pressKey: back
+- swipe:
+    start: "50%,81%"
+    end: "50%,65%"
+    durationMs: 100
+- tapOn: "Device Info.*"
+- assertVisible: "Add Accessories"
+- pressKey: back
+- runFlow:
+    file: tapAndVerify.yaml
+    env:
+      element: "Direct Connect"
+- pressKey: back

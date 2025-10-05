@@ -1,0 +1,8 @@
+env:
+  MAESTRO_APP_ID: com.Franklinwh.FamilyEnergy
+appId: ${MAESTRO_APP_ID}
+tags:
+  - android
+---
+- launchApp
+- runFlow: flows/Off-Grid.yaml
