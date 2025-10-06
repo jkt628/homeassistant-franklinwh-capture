@@ -1,2 +1,7 @@
+ignorePaths:
+- captures
 words:
   - Franklinwh
+  - fromjson
+  - httptoolkit
+  - tojson
