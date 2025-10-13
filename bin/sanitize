@@ -32,20 +32,16 @@ def main():
 
     # obscure account, password and token
     for value in ["account", "token", "password"]:
-        match = re.search(r'\b' + value + r'=([^&"]+)', raw)
+        match = re.search(r"\b" + value + r'=([^&"]+)', raw)
         assert match
         if value == "account":
             value = "john%40doe.com"
         else:
             value = "${" + value + "}"
         raw = raw.replace(match.group(1), value)
-        raw = raw.replace(urllib.parse.unquote(match.group(1)), urllib.parse.unquote(value))
-
-    # obscure serial number(s)
-    serialNumbers = [match for match in re.findall(r"\d+A\d{2}(X\d+)", raw)]
-    for match in serialNumbers:
-        n = random.randint(0, 99999)
-        raw = raw.replace(match, f"{match[:-5]}{n:05d}")
+        raw = raw.replace(
+            urllib.parse.unquote(match.group(1)), urllib.parse.unquote(value)
+        )
 
     # obscure other secrets listed in secrets.yaml
     path = os.path.abspath(__file__)
@@ -53,10 +49,19 @@ def main():
     try:
         with open(path, "r") as f:
             secrets = yaml.safe_load(f)
-            for key, value in secrets.items():
-                raw = raw.replace(key, value)
     except FileNotFoundError:
-        pass
+        secrets = {}
+
+    # obscure serial number(s)
+    serialNumbers = [match for match in re.findall(r"\d+A\d{2}X\d+", raw)]
+    for match in serialNumbers:
+        if match not in secrets:
+            print(f"WARNING: serial number {match} not found in secrets.yaml, generating temporary random number", file=sys.stderr)
+            n = random.randint(0, 99999)
+            secrets[match] = f"{match[:-5]}{n:05d}"
+
+    for key, value in secrets.items():
+        raw = raw.replace(key, value)
 
     # prettify some fields
     data = json.loads(raw)
@@ -71,6 +76,12 @@ def main():
             entry["response"]["content"]["text"] = json.loads(
                 entry["response"]["content"]["text"]
             )
+            try:
+                entry["response"]["content"]["text"]["result"]["dataArea"] = json.loads(
+                    entry["response"]["content"]["text"]["result"]["dataArea"]
+                )
+            except (KeyError, TypeError):
+                pass
 
     json.dump(data, sys.stdout, indent=2)
     print()

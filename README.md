@@ -131,10 +131,17 @@ tests Off- and On-Grid separately due to the disruption and many minutes require
   * optionally [sanitize](bin/sanitize) the HAR file:
 
     ```bash
-    echo Jack: John >bin/secrets.yaml # add as required
+    echo Jack: John >bin/secrets.yaml # add as required, especially serial numbers
     for f in captures/*.har; do
       bin/sanitize $f >${f/har/json}
     done
     ```
 
 * save the logs at `~/.maestro/tests/` to compare times.
+* sanitize the logs
+
+  ```bash
+  for f in captures/*/*.{html,json,log}; do
+    sed -i -e "s,$PWD,.,g; s,$HOME,~,g" $f
+  done
+  ```
