@@ -1,0 +1,29 @@
+#!/bin/python3
+"""
+split entries into separate files denoted by their start time
+"""
+
+import json
+import os
+import sys
+
+
+def main():
+    assert len(sys.argv) >= 2
+
+    with open(sys.argv[1], "r") as f:
+        log = json.load(f)
+
+    # create output directory
+    (dir, _) = os.path.splitext(os.path.abspath(sys.argv[1]))
+    os.mkdir(dir, 0o755)
+    os.chdir(dir)
+
+    for entry in log["log"]["entries"]:
+        with open(f"{entry['startedDateTime']}.json", "w") as f:
+            json.dump(entry, f, indent=2)
+            f.write("\n")
+
+
+if __name__ == "__main__":
+    main()
