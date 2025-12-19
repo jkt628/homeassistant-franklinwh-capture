@@ -33,7 +33,8 @@ def main():
     # obscure account, password and token
     for value in ["account", "token", "password"]:
         match = re.search(r"\b" + value + r'=([^&"]+)', raw)
-        assert match
+        if match is None:
+            continue
         if value == "account":
             value = "john%40doe.com"
         else:
