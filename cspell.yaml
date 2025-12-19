@@ -1,7 +1,9 @@
 ignorePaths:
-- captures
+  - captures
 words:
   - Franklinwh
   - fromjson
   - httptoolkit
+  - keyevent
   - tojson
+  - WAKEUP

@@ -1,0 +1,19 @@
+# Wake Android device periodically and enter PIN to unlock
+# environment:
+# MAESTRO_WAKE_END - date string to end, e.g., MAESTRO_WAKE_END=$(date -I seconds -ud '+1 minute'), default 1 day
+# MAESTRO_WAKE_PERIODIC_MS - milliseconds between wake cycles, default 4 hours (14400000 ms)
+appId: ${MAESTRO_APP_ID}
+tags:
+  - android
+---
+- evalScript: "${output.wake_end = new Date(typeof MAESTRO_WAKE_END !== 'undefined' ? MAESTRO_WAKE_END : new Date().getTime() + 24 * 60 * 60 * 1000)}"
+- repeat:
+    while:
+      true: ${new Date() < output.wake_end}
+    commands:
+      - runFlow: flows/android-wake.yaml
+      - runFlow: 
+          file: flows/sleep.yaml
+          env:
+            milliseconds: ${MAESTRO_WAKE_PERIODIC_MS || 14400000} # Default to 4 hours
+- runFlow: flows/android-wake.yaml

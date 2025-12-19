@@ -1,0 +1,11 @@
+appId: ${MAESTRO_APP_ID}
+tags:
+  - android
+---
+- pressKey: POWER
+- swipe:
+    start: 50%,100%
+    end: 50%,50%
+    durationMs: 100
+- inputText: ${MAESTRO_ANDROID_PIN}
+- pressKey: ENTER
